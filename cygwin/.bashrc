@@ -24,7 +24,15 @@ alias grm='git rm'
 # This will prevent you from accidentally destroying the content of an already 
 # existing file if you redirect output (>filename). You can always force overwriting with >|filename.
 shopt -o noclobber
-PS1='\n[\u@\h]: \w\n$?> '
+
+function default {
+	PS1='\n'"[\$(date +%H:%M)][\u@\h]: \w\n$?>"
+}
+function setfancy {
+	PS1="\n\[\033[0;37m\]\342\224\214\342\224\200\$(if [[ \$? == 0 ]]; then echo \"[\[\033[0;32m\]\[\033[01;32m\]\342\234\223\[\033[0;37m\]]\342\224\200\"; else echo \"[\[\033[0;32m\]\[\033[01;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\"; fi)[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
+}
+
+setfancy
 # History
 # ignore duplicates and same sucessive entries.
 HISTCONTROL=ignoreboth
