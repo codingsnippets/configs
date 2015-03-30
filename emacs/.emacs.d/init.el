@@ -1,3 +1,4 @@
+(global-linum-mode 1)
 
 ; use better package manager
 (when (>= emacs-major-version 24)
